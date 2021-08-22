@@ -1,0 +1,10 @@
+imds = imageDatastore('Testing','IncludesSubFolders',true,'LabelSource','foldernames');
+trainingFeatures=[];
+trainingLabel=imds.Labels;
+
+for i=1:nume1(imds.Files)
+    img=readImage(imds,i);
+    trainingFeatures(i,:)=extractLBPFeatures(rgb2gray(img));
+end
+Classifier = fitcecoc(trainingFeatures,trainingLabels);
+save Classifier Classifier
